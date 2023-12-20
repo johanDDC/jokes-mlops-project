@@ -18,11 +18,11 @@ repos:
       - id: black
 
   - repo: https://github.com/timothycrosley/isort
-    rev: 5.10.1
+    rev: 5.12.0
     hooks:
       - id: isort
 
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/pycqa/flake8
     rev: 3.9.2
     hooks:
       - id: flake8
@@ -33,5 +33,7 @@ repos:
     hooks:
       - id: prettier
         types_or: [markdown, yaml, toml]
-        additional_dependencies: ["prettier@2.6.2", "prettier-plugin-sh@0.10.2"]
+        additional_dependencies:
+          - prettier@2.1.2
+          - "@prettier/plugin-xml@0.12.0"
         args: [--print-width=80, --prose-wrap=always]
