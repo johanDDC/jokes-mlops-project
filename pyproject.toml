@@ -12,6 +12,8 @@ matplotlib = "^3.8.2"
 pandas = "^2.1.4"
 bpe = "^1.0"
 flake8-pyproject = "^1.2.3"
+dvc = "^3.35.0"
+dvc-gdrive = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^3.6.0"
