@@ -56,10 +56,25 @@ class NGramLanguageModel:
         next_token = np.random.choice(tokens, p=probs)
         return next_token
 
+    def __post_process(self, text):
+        punkt = {",", ".", "?", "!", ":"}
+        final = []
+        for word in text:
+            if word[0] == "#" or word in punkt:
+                word = word.replace("#", "")
+                if len(final) == 0:
+                    final.append(word)
+                else:
+                    final[-1] = final[-1] + word
+            else:
+                if word != self.EOS:
+                    final.append(word)
+        return " ".join(final)
+
     def generate(self, prefix):
         prefix = self.tokenizer(prefix)
         for _ in range(100):
             prefix += [self.get_next_token(prefix)]
             if prefix[-1] == self.EOS or len(self.get_tokens_and_probs(prefix)[0]) == 0:
                 break
-        return " ".join(prefix)
+        return self.__post_process(prefix)
