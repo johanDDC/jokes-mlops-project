@@ -31,3 +31,10 @@ class Tokenizer:
 
     def __call__(self, text):
         return self.tokenize(text)
+
+    @classmethod
+    def load(cls, tokenizer_dict):
+        bpe = Encoder.from_dict(tokenizer_dict)
+        tokenizer = cls(bpe.vocab_size, bpe.ngram_max, bpe.pct_bpe)
+        tokenizer.bpe = bpe
+        return tokenizer
