@@ -2,8 +2,15 @@ import re
 from pathlib import Path
 
 import dvc.api as dvc
+import hydra
+from configs.experiment_cfg import ExperimentConfig
+from hydra.core.config_store import ConfigStore
 
 from jokes_mlops_project import NGramLanguageModel, Tokenizer, model_to_json
+
+
+cs = ConfigStore.instance()
+cs.store(name="run1", node=ExperimentConfig)
 
 
 def preprocess_text(text):
@@ -17,7 +24,8 @@ def preprocess_text(text):
     return new_text
 
 
-def main():
+@hydra.main(version_base=None, config_name="run1")
+def main(cfg: ExperimentConfig):
     repository_path = "https://github.com/johanDDC/jokes-mlops-project.git"
     data_dir = Path("data")
     data_file = "data.txt"
@@ -29,8 +37,8 @@ def main():
     data = preprocess_text(data)
 
     # train model
-    tokenizer = Tokenizer(10_000, 5)
-    language_model = NGramLanguageModel(tokenizer, 3)
+    tokenizer = Tokenizer(**cfg.tokenizer_cfg)
+    language_model = NGramLanguageModel(tokenizer, **cfg.model_cfg)
     language_model.fit(data)
 
     # save model
