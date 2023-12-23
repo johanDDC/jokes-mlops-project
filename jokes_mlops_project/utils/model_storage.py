@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from model.model import NGramLanguageModel
-from model.torenizer import Tokenizer
+from jokes_mlops_project.model.model import NGramLanguageModel
+from jokes_mlops_project.model.torenizer import Tokenizer
 
 
 def serialize_probs(probs):
