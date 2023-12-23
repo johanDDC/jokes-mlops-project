@@ -9,10 +9,6 @@ from hydra.core.config_store import ConfigStore
 from jokes_mlops_project import NGramLanguageModel, Tokenizer, model_to_json
 
 
-cs = ConfigStore.instance()
-cs.store(name="run1", node=ExperimentConfig)
-
-
 def preprocess_text(text):
     punkt = "-"
     new_text = []
@@ -49,4 +45,7 @@ def main(cfg: ExperimentConfig):
 
 
 if __name__ == "__main__":
+    cs = ConfigStore.instance()
+    cs.store(name="run1", node=ExperimentConfig)
+
     main()
