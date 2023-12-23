@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from utils.model_storage import model_from_json
+from jokes_mlops_project import model_from_json
 
 
 def main():

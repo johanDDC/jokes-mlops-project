@@ -3,9 +3,7 @@ from pathlib import Path
 
 import dvc.api as dvc
 
-from model.model import NGramLanguageModel
-from model.torenizer import Tokenizer
-from utils.model_storage import model_to_json
+from jokes_mlops_project import NGramLanguageModel, Tokenizer, model_to_json
 
 
 def preprocess_text(text):
