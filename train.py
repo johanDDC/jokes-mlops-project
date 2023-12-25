@@ -45,7 +45,6 @@ def main(cfg: ExperimentConfig):
         run_id = parent_run.info.run_id
         # with mlflow.start_run(run_name=f"train", experiment_id=exp_id, nested=True) as child_run:
         params = dict(cfg)
-        params.update({"git_commit_id": "8b5b85b"})
         mlflow.log_params(params)
         # train model
         tokenizer = Tokenizer(**cfg.tokenizer_cfg)
