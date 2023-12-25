@@ -19,13 +19,15 @@ def deserialize_probs(probs):
     return new_probs
 
 
-def model_to_json(model: NGramLanguageModel, outfile):
+def model_to_json(model: NGramLanguageModel, outfile, **kwargs):
     probs = serialize_probs(model.probs)
     result_dict = {
         "n": model.n,
         "tokenizer": model.tokenizer.bpe.vocabs_to_dict(True),
         "probs": probs,
     }
+    for k in kwargs.keys():
+        result_dict.update({k: kwargs.get(k)})
     json.dump(result_dict, outfile)
 
 
@@ -36,4 +38,5 @@ def model_from_json(filepath: Path) -> NGramLanguageModel:
     model = NGramLanguageModel(tokenizer, obj["n"])
     probs = deserialize_probs(obj["probs"])
     model.probs = probs
-    return model
+    del obj["tokenizer"], obj["n"], obj["probs"]
+    return model, obj
