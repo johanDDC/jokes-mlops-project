@@ -12,6 +12,7 @@ class ExperimentConfig:
     tokenizer_cfg: TokenizerConfig = TokenizerConfig(50_000, 6, 0.95)
     mlflow_cfg: MLFlowConfig = MLFlowConfig("ngram_lang_model")
 
+    base_git_commit_id: str = "778f803"
     prefixes: List[str] = field(
         default_factory=lambda: [
             "заходит мужик в бар",
