@@ -35,7 +35,7 @@ def model_from_json(filepath: Path) -> NGramLanguageModel:
     with filepath.open("r") as file:
         obj = json.load(file)
     tokenizer = Tokenizer.load(obj["tokenizer"])
-    model = NGramLanguageModel(tokenizer, obj["n"])
+    model = NGramLanguageModel(tokenizer, obj["n_grams"])
     probs = deserialize_probs(obj["probs"])
     model.probs = probs
     del obj["tokenizer"], obj["n_grams"], obj["probs"]
