@@ -2,9 +2,9 @@
 
 ## Description
 
-The ngram_jokes_generator module implements the JokesGenerator class, which uses
-an N-gram language model to generate jokes. The text is tokenized using BPE
-before being fed into the model.
+The `jokes-mlops-project` module implements the `NGramLanguageModel` class,
+which uses an N-gram language model to generate jokes. The text is tokenized
+using BPE before being fed into the model.
 
 ## Running a model
 
