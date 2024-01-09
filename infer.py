@@ -25,7 +25,7 @@ def main(cfg: ExperimentConfig):
 
 
 if __name__ == "__main__":
-    cs = ConfigStore.instance()
-    cs.store(name="run1", node=ExperimentConfig)
+    config_store = ConfigStore.instance()
+    config_store.store(name="run1", node=ExperimentConfig)
 
     main()

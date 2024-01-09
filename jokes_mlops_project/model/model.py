@@ -4,18 +4,20 @@ import numpy as np
 
 
 class NGramLanguageModel:
-    def __init__(self, tokenizer, n=3):
+    def __init__(self, tokenizer, n_grams=3):
         self.tokenizer = tokenizer
-        self.n = n
+        self.n_grams = n_grams
         self.UNK = "[UNK]"
         self.EOS = "[EOS]"
 
     def __count_ngrams(self, corpus):
         counts = defaultdict(Counter)
         for text in corpus:
-            tokenized = [self.UNK] * (self.n - 1) + self.tokenizer(text) + [self.EOS]
-            for i in range(self.n - 1, len(tokenized)):
-                counts[tuple(tokenized[i - self.n + 1 : i])][tokenized[i]] += 1
+            tokenized = (
+                [self.UNK] * (self.n_grams - 1) + self.tokenizer(text) + [self.EOS]
+            )
+            for i in range(self.n_grams - 1, len(tokenized)):
+                counts[tuple(tokenized[i - self.n_grams + 1 : i])][tokenized[i]] += 1
         return counts
 
     def fit(self, corpus):
@@ -31,11 +33,11 @@ class NGramLanguageModel:
         return self
 
     def process_prefix(self, prefix):
-        if self.n == 1:
+        if self.n_grams == 1:
             prefix = []
         else:
-            prefix = prefix[-(self.n - 1) :]
-            prefix = [self.UNK] * (self.n - 1 - len(prefix)) + prefix
+            prefix = prefix[-(self.n_grams - 1) :]
+            prefix = [self.UNK] * (self.n_grams - 1 - len(prefix)) + prefix
 
         return prefix
 
